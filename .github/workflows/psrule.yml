@@ -1,26 +1,12 @@
 name: markdown check compliance 
 
 on:
-  repository_dispatch:
-    types: [org-workflow-bot]  
+  pull_request:
+    branches: main
    
 jobs:
-  register:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: SvanBoxel/organization-workflow@main
-      with:
-        id: ${{ github.event.client_payload.id }}
-        callback_url: ${{ github.event.client_payload.callback_url }}
-        sha: ${{ github.event.client_payload.sha }}
-        run_id: ${{ github.run_id }}
-        name: ${{ env.name || github.workflow }}
-        documentation: ".github/workflows/github-check.md"
-        enforce: true
-        enforce_admin: true
         
   main:
-    needs: [register]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
