@@ -23,7 +23,7 @@ jobs:
         script: |
           Install-Module -Name 'PSRule.Rules.GitHub' -Scope CurrentUser -Force;
           Export-GitHubRuleData -UseGitHubToken;
-          Assert-PSRule -Module 'PSRule.Rules.GitHub' -InputPath .\*.json -Style GitHubActions -OutputFormat Sarif -OutputPath reports/ps-rule-results.sarif;
+          Assert-PSRule -Option .github/options/psrule.pullrequest.yaml -InputPath .\*.json -OutputPath reports/ps-rule-results.sarif;
           
     - name: Upload results to security tab
       if: success() || failure()
