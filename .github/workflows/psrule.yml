@@ -27,6 +27,7 @@ jobs:
         sarif_file: reports/ps-rule-results.sarif
         
     - name: Analyze Azure template files
+      if: success() || failure()
       uses: microsoft/ps-rule@v2.2.0
       with:
         modules: 'PSRule.Rules.GitHub'
