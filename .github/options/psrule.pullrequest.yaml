@@ -7,7 +7,7 @@ include:
     - PSRule.Rules.GitHub
 
 configuration:
-  GitHub_BranchName_Disallowed: main
+  GitHub_BranchName_Disallowed: master
   GitHub_BranchName_Format: '^(main|gh-pages|users\/\w*\/\w+|shared\/\w+)$'
   
 rule:
