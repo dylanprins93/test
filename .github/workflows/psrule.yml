@@ -1,11 +1,13 @@
+env:
+  PSRULE_CONFIGURATION_AZURE_BICEP_FILE_EXPANSION: true
+  PSRULE_OUTPUT_FORMAT: Sarif
+  PSRULE_RULE_EXCLUDE: 'GitHub.Repo.CodeOfConduct;GitHub.Repo.Contributing;GitHub.Repo.Readme;GitHub.Repo.CodeOwners;GitHub.Repo.License'
+
 name: Github PSRules check
 
 on:
-  push:
+  pull_request:
     branches: [ main ]
-  schedule:
-  - cron: '24 22 * * 0' # At 10:24 PM, on Sunday each week
-  workflow_dispatch:
    
 jobs:
         
