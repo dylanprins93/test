@@ -17,5 +17,5 @@ rule:
     - "GitHub.Repo.CodeOwners"
     - "GitHub.Repo.License"
 
-Output:
-  Culture: en-us
+output:
+  culture: [ 'en-US' ]
