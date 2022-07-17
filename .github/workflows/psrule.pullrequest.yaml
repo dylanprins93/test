@@ -1,8 +1,3 @@
-env:
-  PSRULE_CONFIGURATION_AZURE_BICEP_FILE_EXPANSION: true
-  PSRULE_OUTPUT_FORMAT: Sarif
-  PSRULE_RULE_EXCLUDE: 'GitHub.Repo.CodeOfConduct;GitHub.Repo.Contributing;GitHub.Repo.Readme;GitHub.Repo.CodeOwners;GitHub.Repo.License'
-
 name: Github PSRules check
 
 on:
@@ -23,7 +18,7 @@ jobs:
         script: |
           Install-Module -Name 'PSRule.Rules.GitHub' -Scope CurrentUser -Force;
           Export-GitHubRuleData -UseGitHubToken;
-          Assert-PSRule -Module 'PSRule.Rules.GitHub' -InputPath .\*.json -Style GitHubActions -OutputFormat Sarif -OutputPath reports/ps-rule-results.sarif;
+          Assert-PSRule -Module 'PSRule.Rules.GitHub' -Option .github/options/psrule.pullrequest.yaml -InputPath .\*.json -Style GitHubActions -OutputFormat Sarif -OutputPath reports/ps-rule-results.sarif;
           
     - name: Upload results to security tab
       if: success() || failure()
