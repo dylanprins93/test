@@ -1,0 +1,18 @@
+requires:
+  # Require a minimum of PSRule for Azure v1.10.2
+  PSRule.Rules.GitHub: ">=0.2.0"
+
+include:
+  module:
+    - PSRule.Rules.GitHub
+
+configuration:
+  GitHub_BranchName_Disallowed: main
+rule:
+  includeLocal: false
+  exclude:
+    - "GitHub.Repo.CodeOfConduct"
+    - "GitHub.Repo.Contributing"
+    - "GitHub.Repo.Readme"
+    - "GitHub.Repo.CodeOwners"
+    - "GitHub.Repo.License"
