@@ -27,6 +27,9 @@ jobs:
         script: |
           Install-Module -Name 'PSRule.Rules.GitHub' -Scope CurrentUser -Force;
           Export-GitHubRuleData -Repository ${{ github.repository }};
-          ls;
-          write-output "Assert-PSRule -Module 'PSRule.Rules.GitHub' -InputPath .\*.json";
-          Assert-PSRule -Module 'PSRule.Rules.GitHub' -InputPath .\*.json -Style GitHubActions;
+          Assert-PSRule -Module 'PSRule.Rules.GitHub' -InputPath .\*.json -Style GitHubActions -OutputFormat Sarif -OutputPath reports/ps-rule-results.sarif;
+          
+    - name: Upload results to security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: reports/ps-rule-results.sarif
