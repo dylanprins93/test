@@ -20,7 +20,7 @@ jobs:
         # PowerShell script to execute in Actions-hydrated context
         script: |
           Install-Module -Name 'PSRule.Rules.GitHub' -Scope CurrentUser -Force;
-          Export-GitHubRuleData -Repository ${{ github.repository }};
+          Export-GitHubRuleData;
           Assert-PSRule -Module 'PSRule.Rules.GitHub' -InputPath .\*.json -Style GitHubActions -OutputFormat Sarif -OutputPath reports/ps-rule-results.sarif;
           
     - name: Upload results to security tab
