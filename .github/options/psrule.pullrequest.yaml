@@ -16,3 +16,6 @@ rule:
     - "GitHub.Repo.Readme"
     - "GitHub.Repo.CodeOwners"
     - "GitHub.Repo.License"
+
+Output:
+  Culture: en-us
