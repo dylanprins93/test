@@ -27,4 +27,6 @@ jobs:
         script: |
           Install-Module -Name 'PSRule.Rules.GitHub' -Scope CurrentUser;
           Export-GitHubRuleData -Repository ${{ github.repository }};
+          ls;
+          write-output "Assert-PSRule -Module 'PSRule.Rules.GitHub' -InputPath .\*.json";
           Assert-PSRule -Module 'PSRule.Rules.GitHub' -InputPath .\*.json;
