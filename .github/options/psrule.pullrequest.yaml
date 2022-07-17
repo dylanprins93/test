@@ -19,3 +19,6 @@ rule:
 
 output:
   culture: [ 'en-US' ]
+  format: Sarif
+  style: GitHubActions
+  outcome: All
