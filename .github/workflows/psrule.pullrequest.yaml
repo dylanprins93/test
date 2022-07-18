@@ -18,14 +18,7 @@ jobs:
         script: |
           Install-Module -Name 'PSRule.Rules.GitHub' -Scope CurrentUser -Force;
           Export-GitHubRuleData -UseGitHubToken;
-          Assert-PSRule -Option .github/options/psrule.pullrequest.yaml -InputPath .\*.json -OutputPath reports/ps-rule-results.sarif;
           
-    - name: Upload results to security tab
-      if: success() || failure()
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: reports/ps-rule-results.sarif
-        
     - name: Analyze Azure template files
       if: success() || failure()
       uses: microsoft/ps-rule@v2.2.0
@@ -33,3 +26,11 @@ jobs:
         modules: 'PSRule.Rules.GitHub'
         inputType: 'inputPath'
         inputPath: '*.json'
+        option: '.github/options/psrule.pullrequest.yaml'
+        outputPath: reports/ps-rule-results.sarif
+          
+    - name: Upload results to security tab
+      if: success() || failure()
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: reports/ps-rule-results.sarif
