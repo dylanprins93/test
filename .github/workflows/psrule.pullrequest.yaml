@@ -17,8 +17,8 @@ jobs:
       with:
         script: |
           Install-Module -Name 'PSRule.Rules.GitHub' -Scope CurrentUser -Force;
-          Export-GitHubRuleData -UseGitHubToken;
-          Assert-PSRule -Option .github/options/psrule.pullrequest.yaml -InputPath .\*.json -OutputPath reports/ps-rule-results.sarif;
+          Export-GitHubRuleData -UseGitHubToken -OutputPath ExportGitHubData.json;
+          Assert-PSRule -Option .github/options/psrule.pullrequest.yaml -InputPath .\ExportGitHubData.json -OutputPath reports/ps-rule-results.sarif;
           
 #     - name: Analyze Azure template files
 #       if: success() || failure()
@@ -26,7 +26,7 @@ jobs:
 #       with:
 #         modules: 'PSRule.Rules.GitHub'
 #         inputType: 'inputPath'
-#         inputPath: '*.json'
+#         inputPath: 'ExportGitHubData.json'
 #         option: '.github/options/psrule.pullrequest.yaml'
 #         outputPath: 'reports/ps-rule-results.sarif'
           
