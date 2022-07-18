@@ -24,3 +24,4 @@ output:
   format: Sarif
   style: GitHubActions
   outcome: All
+  outputPath: 'reports/ps-rule-results.sarif'
