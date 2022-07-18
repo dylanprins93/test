@@ -12,22 +12,23 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
         
-    - name: PowerShell script
+    - name: Analyze Azure template files
       uses: Amadevus/pwsh-script@v2.0.1
       with:
         script: |
           Install-Module -Name 'PSRule.Rules.GitHub' -Scope CurrentUser -Force;
           Export-GitHubRuleData -UseGitHubToken;
+          Assert-PSRule -Option .github/options/psrule.pullrequest.yaml -InputPath .\*.json -OutputPath reports/ps-rule-results.sarif;
           
-    - name: Analyze Azure template files
-      if: success() || failure()
-      uses: microsoft/ps-rule@v2.2.0
-      with:
-        modules: 'PSRule.Rules.GitHub'
-        inputType: 'inputPath'
-        inputPath: '*.json'
-        option: '.github/options/psrule.pullrequest.yaml'
-        outputPath: 'ps-rule-results.sarif'
+#     - name: Analyze Azure template files
+#       if: success() || failure()
+#       uses: microsoft/ps-rule@v2.2.0
+#       with:
+#         modules: 'PSRule.Rules.GitHub'
+#         inputType: 'inputPath'
+#         inputPath: '*.json'
+#         option: '.github/options/psrule.pullrequest.yaml'
+#         outputPath: 'ps-rule-results.sarif'
           
     - name: Upload results to security tab
       if: success() || failure()
