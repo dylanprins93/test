@@ -31,3 +31,5 @@ jobs:
       uses: microsoft/ps-rule@v2.2.0
       with:
         modules: 'PSRule.Rules.GitHub'
+        inputType: 'inputPath'
+        inputPath: '*.json'
